@@ -1,7 +1,7 @@
 <div class="DraggebleItem-comp" style={orderStyle} draggable="true" 
         on:dragstart={onDrag}
         on:dragenter={onDragEnter}>
-    <h1>#{temp_index}</h1>
+    <slot />
 </div>
 
 <script>
@@ -17,7 +17,7 @@ const dispatche = createEventDispatcher()
 const onDrag = () => {
     dispatche("element-draged",{id,orderIndex})
 }
-const onDragEnter = (e) => {
+const onDragEnter = () => {
     dispatche("sorte-list",{newOrder:orderIndex})
 }
 </script>
@@ -27,8 +27,8 @@ const onDragEnter = (e) => {
     background: rgb(105, 105, 105);
     color: white;
 
-    height: 40px;
-    width: 200px;
+    height: fit-content;
+    width: fit-content;
     h1 {
         font-size: 16px;
     }
