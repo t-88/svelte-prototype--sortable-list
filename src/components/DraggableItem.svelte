@@ -1,22 +1,24 @@
-<div class="DraggebleItem-comp" draggable="true" 
-    bind:this={ref} on:dragstart={onDrag} on:dragend={onDrop}>
-    <h1>#{index}</h1>
+<div class="DraggebleItem-comp" style={orderStyle} draggable="true" 
+        on:dragstart={onDrag}
+        on:dragenter={onDragEnter}>
+    <h1>#{temp_index}</h1>
 </div>
 
 <script>
-import {createEventDispatcher} from "svelte"
-const dispatche = createEventDispatcher() 
-export let index = 0
+import { createEventDispatcher } from "svelte"
+export let temp_index = 0  
+
+
+export let id = 0
 export let orderIndex = 0 
-let ref = null
+$: orderStyle = `order:${orderIndex}`
+
+const dispatche = createEventDispatcher() 
 const onDrag = () => {
-    dispatche("element-draged",{index,orderIndex,ref})
-    ref.style.opacity = "1"
-    dispatche("errorasd")
+    dispatche("element-draged",{id,orderIndex})
 }
-const onDrop = () => {
-    dispatche("element-droped",orderIndex)
-    ref.style.opacity = "1"
+const onDragEnter = (e) => {
+    dispatche("sorte-list",{newOrder:orderIndex})
 }
 </script>
 
@@ -26,7 +28,7 @@ const onDrop = () => {
     color: white;
 
     height: 40px;
-    width: 190px;
+    width: 200px;
     h1 {
         font-size: 16px;
     }
